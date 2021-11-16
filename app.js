@@ -1,7 +1,7 @@
 require('dotenv').config()
 const express = require('express')
 const app = express()
-const setRoutesAPI = require('./src/routes')
+// const setRoutesAPI = require('./src/routes')
 
 app.use('/api',express.json({limit: '10mb', extended: true}))
 app.use('/api' ,(err, req, res, next) => {
@@ -20,9 +20,13 @@ app.use('/api',(req, res, next) => {
 	next()
 })
 
-setRoutesAPI(app)
+// setRoutesAPI(app)
+app.get('/', (req, res) => {
+	return res.send('Hola')
+})
 
+const PORT = process.env.PORT || 5000
 
-app.listen( process.env.PORT || 5000, () => {
-	console.log(`API initializated. Server listening on port ${process.env.PORT || 5000}`)
+app.listen( PORT, () => {
+	console.log(`API initializated. Server listening on port ${PORT}`)
 })
