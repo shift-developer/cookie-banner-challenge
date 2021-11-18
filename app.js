@@ -1,7 +1,8 @@
 require('dotenv').config()
+require('./src/services/db/db')
 const express = require('express')
 const app = express()
-// const setRoutesAPI = require('./src/routes')
+const setRoutesAPI = require('./src/network/routes')
 
 app.use('/api',express.json({limit: '10mb', extended: true}))
 app.use('/api' ,(err, req, res, next) => {
@@ -20,9 +21,9 @@ app.use('/api',(req, res, next) => {
 	next()
 })
 
-// setRoutesAPI(app)
+setRoutesAPI(app)
 app.get('/', (req, res) => {
-	return res.send('Hola')
+	return res.send('Hola mundo')
 })
 
 const PORT = process.env.PORT || 5000

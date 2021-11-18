@@ -19,13 +19,15 @@
   },
   "homepage": "https://github.com/shift-developer/wibson-challenge#readme",
   "dependencies": {
+    "bcrypt": "^5.0.1",
     "dotenv": "10.0.0",
     "express": "4.17.1",
-    "remove": "^0.1.5"
+    "jsonwebtoken": "8.5.1",
+    "mongoose": "6.0.13"
   },
   "devDependencies": {
     "eslint": "8.2.0",
     "nodemon": "2.0.15",
-    "standard": "^16.0.4"
+    "standard": "16.0.4"
   }
 }

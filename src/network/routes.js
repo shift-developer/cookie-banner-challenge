@@ -1,4 +1,4 @@
-const loginRouter = require('./components/auth/network')
+const loginRouter = require('../components/auth/network')
 
 const setRoutesAPI = ( app ) => {
 	app.use('/api/auth', loginRouter)
