@@ -8,8 +8,35 @@ const generateToken = ({userId, email}) => {
 	return {token, tokenExpiresAt}
 }
 
+const authenticateToken = (authorization) => {
+
+	try {
+		if (!authorization) {
+			throw new Error('You must provide a Bearer token in request headers.')
+		}
+	
+		if (authorization.indexOf('Bearer ') === -1) {
+			throw new Error('Bad format. Example: Bearer aAnUW1jas')
+		}
+
+		const token = authorization.replace('Bearer ', '')
+		let tokenInfo = {}
+		try {
+			tokenInfo = jwt.verify(token, JWT_SIGNATURE)
+		} catch (e) {
+			throw new Error('Invalid credentials or expired token')
+		}
+		
+		return tokenInfo
+
+	} catch (e) {
+		return Promise.reject({message: e.message, status: 401})
+	}
+}
+
 module.exports = {
-	generateToken
+	generateToken,
+	authenticateToken
 }
 
 
