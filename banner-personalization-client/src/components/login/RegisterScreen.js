@@ -21,6 +21,8 @@ export const RegisterScreen = () => {
 
     const {email, password, fullName} = formValues
 
+      // TO DO make the loading icon charge and field validation, and manage errors
+
     const handleSignUp = async () => {
         try {
             const { token } = await register({email, password, fullName})

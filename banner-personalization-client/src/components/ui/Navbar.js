@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { AppBar, IconButton, Toolbar, Typography, Box } from '@mui/material'
+import { AppBar, IconButton, Toolbar, Typography, Box, Tooltip } from '@mui/material'
 import LogoutIcon from '@mui/icons-material/Logout';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import { AuthContext } from '../../auth/authContext';
@@ -33,6 +33,7 @@ export const Navbar = () => {
                 <AccountCircle />
                 <Typography style={{marginLeft: 5}}>{user.fullName || ''}</Typography>
               </div>
+            <Tooltip title="Log Out">
             <IconButton
                 size="large"
                 edge="start"
@@ -42,6 +43,7 @@ export const Navbar = () => {
             >
                 <LogoutIcon />
             </IconButton>
+            </Tooltip>
           </div>
         </Toolbar>
       </AppBar>

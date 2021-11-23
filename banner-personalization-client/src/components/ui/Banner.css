@@ -1,0 +1,15 @@
+.banner-box-ui-cmp {
+    padding: 20px 10px 20px 10px;
+    border: 1px solid #000;
+    display: flex;
+    justify-content: space-between;
+    border-radius: 15px;
+}
+
+.banner-text-ui-cmp {
+
+}
+
+.banner-button-ui-cmp {
+
+}

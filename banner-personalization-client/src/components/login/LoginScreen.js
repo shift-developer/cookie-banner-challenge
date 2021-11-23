@@ -19,6 +19,8 @@ export const LoginScreen = () => {
         password: ''
     });
 
+    // TO DO make the loading icon charge and field validation, and manage errors
+
     const {email, password} = formValues
 
     const handleSignIn = async () => {
