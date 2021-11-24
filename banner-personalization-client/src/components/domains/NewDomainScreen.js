@@ -3,11 +3,10 @@ import { useNavigate } from 'react-router-dom'
 import { useForm } from '../../hooks/useForm';
 import { addDomain } from '../../api/apiCalls';
 
-import { IconButton, TextField, Tooltip, Typography } from '@mui/material'
+import { Button, IconButton, TextField, Tooltip, Typography } from '@mui/material'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 import { ColorPicker, createColor } from 'material-ui-color';
 import { usePickerColor } from '../../hooks/usePickerColor';
-import { Banner } from '../ui/Banner';
 
 const defaultColors = {
     bckColor: 'fff',
@@ -28,12 +27,22 @@ export const NewDomainScreen = () => {
     })
 
     const {bckColor, primaryColor, fontColor} = colorValues
-    console.log(colorValues)
 
     const { domain } = formValues
 
     const handleBack = () => {
         return navigate('/')
+    }
+
+    const handleAddDomain = async () => {
+        try {
+            const response = await addDomain({domain, bckColor: `#${bckColor.hex || defaultColors.bckColor}`, primaryColor: `#${primaryColor.hex || defaultColors.primaryColor}`, fontColor: `#${fontColor.hex || defaultColors.fontColor}`})
+            const { domainId } = response
+            return navigate('/domain/'+domainId)
+        } catch (e) {
+            console.log(e)
+        }
+
     }
 
     return (
@@ -53,7 +62,7 @@ export const NewDomainScreen = () => {
                 <Typography variant="h6" component="h4" style={{marginLeft: 20}}>Add new domain</Typography>
             </div>
             <div style={{display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center'}}>
-                <form style={{marginTop: 20, marginBottom: 20, maxWidth: 500}}>
+                <div style={{marginTop: 20, marginBottom: 20, maxWidth: 500}}>
                     <TextField 
                         label="Domain" 
                         variant="outlined" 
@@ -66,55 +75,65 @@ export const NewDomainScreen = () => {
                         error={false}
                         style={{marginBottom: 20}}
                     />
-                    <Typography style={{fontSize: 19, color: '#6b7280', marginBottom: 10}}>Banner customization</Typography>
-                    <div style={{marginBottom: 15}}>
-                        <Typography style={{fontSize: 15}}>Background color:</Typography>
-                        <div style={{display: 'flex', alignItems: 'center', marginRight: 10}}>
-                        <TextField 
-                            variant="outlined" 
-                            size='small'
-                            style={{maxWidth: 100}}
-                            disabled
-                            value={`#${bckColor.hex || defaultColors.bckColor}`}
-                        />
-                        <ColorPicker value={bckColor} onChange={(value) => handleColorChange(value, 'bckColor')} hideTextfield/>
-                        </div>
-                    </div>
+                    <div>
+                        <Typography style={{fontSize: 19, color: '#6b7280', marginBottom: 10}}>Banner customization</Typography>
+                        <div style={{display: 'flex', flexWrap: 'wrap'}}>
+                            <div style={{marginBottom: 15}}>
+                                <Typography style={{fontSize: 15}}>Background color:</Typography>
+                                <div style={{display: 'flex', alignItems: 'center', marginRight: 10}}>
+                                <TextField 
+                                    variant="outlined" 
+                                    size='small'
+                                    style={{maxWidth: 100}}
+                                    disabled
+                                    value={`#${bckColor.hex || defaultColors.bckColor}`}
+                                />
+                                <ColorPicker value={bckColor} onChange={(value) => handleColorChange(value, 'bckColor')} hideTextfield/>
+                                </div>
+                            </div>
 
-                    <div style={{marginBottom: 15}}>
-                        <Typography style={{fontSize: 15}}>Primary color:</Typography>
-                        <div style={{display: 'flex', alignItems: 'center', marginRight: 10}}>
-                        <TextField 
-                            variant="outlined" 
-                            size='small'
-                            style={{maxWidth: 100}}
-                            disabled
-                            value={`#${primaryColor.hex || defaultColors.primaryColor}`}
-                        />
-                        <ColorPicker value={primaryColor} onChange={(value) => handleColorChange(value, 'primaryColor')} hideTextfield/>
-                        </div>
-                    </div>
+                            <div style={{marginBottom: 15}}>
+                                <Typography style={{fontSize: 15}}>Primary color:</Typography>
+                                <div style={{display: 'flex', alignItems: 'center', marginRight: 10}}>
+                                <TextField 
+                                    variant="outlined" 
+                                    size='small'
+                                    style={{maxWidth: 100}}
+                                    disabled
+                                    value={`#${primaryColor.hex || defaultColors.primaryColor}`}
+                                />
+                                <ColorPicker value={primaryColor} onChange={(value) => handleColorChange(value, 'primaryColor')} hideTextfield/>
+                                </div>
+                            </div>
 
-                    <div style={{marginBottom: 15}}>
-                        <Typography style={{fontSize: 15}}>Font color:</Typography>
-                        <div style={{display: 'flex', alignItems: 'center', marginRight: 10}}>
-                        <TextField 
-                            variant="outlined" 
-                            size='small'
-                            style={{maxWidth: 100}}
-                            disabled
-                            value={`#${fontColor.hex || defaultColors.fontColor}`}
-                        />
-                        <ColorPicker value={fontColor} onChange={(value) => handleColorChange(value, 'fontColor')} hideTextfield/>
+                            <div style={{marginBottom: 15}}>
+                                <Typography style={{fontSize: 15}}>Font color:</Typography>
+                                <div style={{display: 'flex', alignItems: 'center', marginRight: 10}}>
+                                <TextField 
+                                    variant="outlined" 
+                                    size='small'
+                                    style={{maxWidth: 100}}
+                                    disabled
+                                    value={`#${fontColor.hex || defaultColors.fontColor}`}
+                                />
+                                <ColorPicker value={fontColor} onChange={(value) => handleColorChange(value, 'fontColor')} hideTextfield/>
+                                </div>
+                            </div>
+                            
                         </div>
                     </div>
-        
-                </form>
-                <Banner 
-                    backgroundColor={`#${bckColor.hex || defaultColors.bckColor}`}
-                    primaryColor={`#${primaryColor.hex || defaultColors.primaryColor}`}
-                    fontColor={`#${fontColor.hex || defaultColors.fontColor}`}
-                />
+                    <Button 
+                        variant="contained" 
+                        fullWidth
+                        style={{background: '#7c3aed', maxWidth: 500, marginTop: 20}}
+                        onClick={() => {handleAddDomain()}}
+                    >
+                        <Typography style={{fontSize: 14}}>
+                            Add domain
+                        </Typography>
+                    </Button>
+                </div>
+               
             </div>
             <div>
 

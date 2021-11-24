@@ -12,7 +12,7 @@ export const DashboardRoutes = () => {
 
             <Routes>
                 <Route path='/new' element={<NewDomainScreen />}/>
-                <Route path='/domain' element={<DomainScreen />}/>
+                <Route path='/domain/:domainId' element={<DomainScreen />}/>
                 <Route path='/' element={<HomeScreen />}/>
             </Routes>
         </>

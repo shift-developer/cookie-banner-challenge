@@ -88,3 +88,35 @@ export const addDomain = async ({domain, bckColor, primaryColor, fontColor}) => 
         return Promise.reject(e)
     }
 }
+
+export const getDomainById = async (domainId) => {
+    try {
+        const response = await axios('/api/domains/' + domainId)
+        return response.data 
+    } catch (e) {
+        if(e.response.data) {
+            throw new Error(e.response.data.message)
+        }
+        return Promise.reject(e)
+    }
+}
+
+export const editDomainById = async ({domainId, domainData}) => {
+    try {
+        const _token = localStorage.getItem('token')
+
+        const requestOptions = {
+            method: 'PUT',
+            headers: {Authorization: "Bearer " + _token},
+            data: {domain: domainData.domain, bckColor: domainData.bckColor, primaryColor: domainData.primaryColor, fontColor: domainData.fontColor}
+        };
+        console.log(`requestOptions.data`, requestOptions.data)
+        const response = await axios('/api/domains/' + domainId, requestOptions)
+        return response.data 
+    } catch (e) {
+        if(e.response.data) {
+            throw new Error(e.response.data.message)
+        }
+        return Promise.reject(e)
+    }
+}

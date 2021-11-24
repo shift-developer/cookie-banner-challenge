@@ -24,8 +24,8 @@ export const HomeScreen = () => {
             <div style={{marginTop: 20}}>
                 <NewDomainCard/>
                 {
-                    domains.map((domain, idx) => (
-                        <DomainCard id={idx} domainDetails={domain}/>
+                    domains.map((domain) => (
+                        <DomainCard key={domain._id} domainDetails={domain}/>
                     ))
                 }
             </div>

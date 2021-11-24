@@ -1,9 +1,18 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom';
 import { Card, CardActions, CardContent, Chip, IconButton, Tooltip, Typography } from '@mui/material'
 import EditIcon from '@mui/icons-material/Edit'
 import DeleteIcon from '@mui/icons-material/Delete';
 
 export const DomainCard = ({domainDetails}) => {
+    const navigate = useNavigate()
+    const handleEdit = (domainId) => {
+        return navigate('/domain/' + domainId)
+    }
+
+    const handleDelete = () => {
+
+    }
     return (
         <Card sx={{ minWidth: 275, marginBottom: 2 }} variant="outlined">
             <CardContent>
@@ -14,18 +23,18 @@ export const DomainCard = ({domainDetails}) => {
                     </Typography>
                 </div>
                 <Typography variant="h5" component="div" style={{marginLeft: 5}}>
-                    {domainDetails}
+                    {domainDetails.domain}
                 </Typography>
             
             </CardContent>
             <CardActions>
                 <Tooltip title="Edit">
-                    <IconButton aria-label="add to favorites">
+                    <IconButton onClick={() => handleEdit(domainDetails._id)}>
                         <EditIcon />
                     </IconButton>
                 </Tooltip>
                 <Tooltip title="Delete">
-                    <IconButton aria-label="add to favorites">
+                    <IconButton onClick={() => {handleDelete(domainDetails._id)}}>
                         <DeleteIcon />
                     </IconButton>
                 </Tooltip>

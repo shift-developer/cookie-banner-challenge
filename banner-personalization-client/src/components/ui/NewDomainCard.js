@@ -19,7 +19,7 @@ export const NewDomainCard = () => {
             <CardActions>
             <Button 
                 variant="contained" 
-                style={{background: '#7c3aed'}}
+                style={{background: '#7c3aed', marginLeft: 10, marginBottom: 10}}
                 onClick={() => handleAddDomain()}
             >
                 <AddIcon style={{fontSize: 14, marginRight: 5}}/>
