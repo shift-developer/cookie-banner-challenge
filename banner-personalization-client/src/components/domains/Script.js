@@ -5,7 +5,7 @@ export const Script = ({domainId}) => {
 
     const [open, setOpen] = React.useState(false);
 
-    const scriptHtmlText = `<script async domain-id="${domainId}" src="${window.location.origin}/banner.js"></script>`
+    const scriptHtmlText = `<script defer domain-id="${domainId}" src="${window.location.origin}/banner.js"></script>`
     
     const handleClose = (event, reason) => {
         setOpen(false)
