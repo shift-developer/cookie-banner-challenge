@@ -51,7 +51,6 @@ const updateDomainById = async ({id, domain, bckColor, primaryColor, fontColor, 
 		const res = await Domain.updateOne({_id:id }, updatedFields)
 		return res
 	} catch (e) {
-		console.log(e)
 		return Promise.reject({message: 'Server internal error', status: 500})
 	}
 }
@@ -73,7 +72,6 @@ const destroyDomainById = async ({id, userId}) => {
 		const res = await Domain.deleteOne({_id: id})
 		return res
 	} catch (e) {
-		console.log(e)
 		return Promise.reject({message: 'Server internal error', status: 500})
 	}
 }
@@ -89,7 +87,6 @@ const getDomainById = async({id}) => {
 		}
 		return domainObj
 	} catch (e) {
-		console.log(e)
 		return Promise.reject({message: 'Server internal error', status: 500})
 	}
 }
@@ -99,7 +96,6 @@ const getDomainsFromUserId = async ({userId}) => {
 		const domainFind = await Domain.find({userId})
 		return domainFind
 	} catch (e) {
-		console.log(e)
 		return Promise.reject({message: 'Server internal error', status: 500})
 	}
 }

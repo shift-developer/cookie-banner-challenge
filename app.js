@@ -7,7 +7,6 @@ const setRoutesAPI = require('./src/network/routes')
 
 app.use('/api',express.json({limit: '10mb', extended: true}))
 app.use('/api' ,(err, req, res, next) => {
-	console.log('entra')
 	if (err) {
 		res.status(400).json({success: false, msg: 'Bad format in JSON body'})
 	} else {
