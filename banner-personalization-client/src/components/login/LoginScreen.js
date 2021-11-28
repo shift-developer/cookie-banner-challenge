@@ -1,11 +1,11 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 
 import { AuthContext } from '../../auth/authContext';
 import { types } from '../../types';
 import { useNavigate } from 'react-router-dom';
 
 import { Logo } from './Logo';
-import { Button, Container, Grid, Box, TextField } from '@mui/material'
+import { Button, Container, Grid, Box, TextField, CircularProgress, Typography, Alert } from '@mui/material'
 import { login, userInfo } from '../../api/apiCalls';
 import { useForm } from '../../hooks/useForm';
 
@@ -19,12 +19,13 @@ export const LoginScreen = () => {
         password: ''
     });
 
-    // TO DO make the loading icon charge and field validation, and manage errors
+    const [{loading, error}, setLoading] = useState({loading: false, error: null})
 
     const {email, password} = formValues
 
     const handleSignIn = async () => {
         try {
+            setLoading({loading: true, error: null})
             const { token } = await login({email, password})
             localStorage.setItem('token', token)
             const user = await userInfo({token})
@@ -33,10 +34,10 @@ export const LoginScreen = () => {
                 type: types.login,
                 payload: user
             }
-
             dispatch(action);
 
         } catch (e) {
+            setLoading({loading: false, error: e.message})
             console.log(e)
         }
 
@@ -75,13 +76,24 @@ export const LoginScreen = () => {
                             style={{marginBottom: 10}}
                         />
                     </form>
+
+                    {
+                        error && <Alert severity="error" style={{marginBottom: 10}}>{error}</Alert>
+                    }
                     
                     <Button 
                         variant="contained" 
                         style={{background: '#7c3aed'}}
                         onClick={() => handleSignIn()}
                     >
-                        Sign In
+                        {
+                            loading ?
+                            <CircularProgress size={14} style={{color: '#fff'}}/>
+                            :
+                            <Typography style={{fontSize: 14}}>
+                                Sign in
+                            </Typography>
+                        }
                     </Button>
                     <Button variant="text" style={{color: '#7c3aed', marginTop: 4, fontWeight: 'normal', fontSize: 13}} onClick={() => navigate('/register')}>Sign Up</Button>
                 </div>

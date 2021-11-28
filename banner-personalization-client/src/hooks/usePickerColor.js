@@ -12,5 +12,5 @@ export const usePickerColor = (initialState = {}) => {
         })
     }, [values])
 
-    return [values, handleColorChange, reset]
+    return [values, handleColorChange, reset, setValues]
 }

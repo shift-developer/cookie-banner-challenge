@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useForm } from '../../hooks/useForm';
 import { addDomain } from '../../api/apiCalls';
 
-import { Button, IconButton, TextField, Tooltip, Typography } from '@mui/material'
+import { Alert, Button, CircularProgress, IconButton, TextField, Tooltip, Typography } from '@mui/material'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 import { ColorPicker, createColor } from 'material-ui-color';
 import { usePickerColor } from '../../hooks/usePickerColor';
@@ -19,6 +19,7 @@ export const NewDomainScreen = () => {
     const [formValues, handleInputChange] = useForm({
         domain: ''
     })
+    const [{loading, error}, setLoading] = useState({loading: false, error: null})
 
     const [ colorValues, handleColorChange ] = usePickerColor({
         bckColor: createColor('#'+defaultColors.bckColor),
@@ -36,10 +37,15 @@ export const NewDomainScreen = () => {
 
     const handleAddDomain = async () => {
         try {
+            setLoading({loading: true, error: null})
+            if(/^[a-zA-Z0-9][a-zA-Z0-9-]{1,61}[a-zA-Z0-9](?:\.[a-zA-Z]{2,})+$/.test(domain) === false) {
+                throw new Error('Enter valid domain name')
+            }
             const response = await addDomain({domain, bckColor: `#${bckColor.hex || defaultColors.bckColor}`, primaryColor: `#${primaryColor.hex || defaultColors.primaryColor}`, fontColor: `#${fontColor.hex || defaultColors.fontColor}`})
             const { domainId } = response
             return navigate('/domain/'+domainId)
         } catch (e) {
+            setLoading({error: e.message, loading: false})
             console.log(e)
         }
 
@@ -122,15 +128,26 @@ export const NewDomainScreen = () => {
                             
                         </div>
                     </div>
+
+                    {
+                        error && <Alert severity="error" style={{marginTop: 10}}>{error}</Alert>
+                    }
+
                     <Button 
                         variant="contained" 
                         fullWidth
                         style={{background: '#7c3aed', maxWidth: 500, marginTop: 20}}
                         onClick={() => {handleAddDomain()}}
                     >
-                        <Typography style={{fontSize: 14}}>
-                            Add domain
-                        </Typography>
+                        {
+                            loading ?
+                            <CircularProgress size={14} style={{color: '#fff'}}/>
+                            :
+                            <Typography style={{fontSize: 14}}>
+                                Add domain
+                            </Typography>
+                        }
+                        
                     </Button>
                 </div>
                

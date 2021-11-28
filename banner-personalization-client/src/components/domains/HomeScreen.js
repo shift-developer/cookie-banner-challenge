@@ -13,7 +13,13 @@ export const HomeScreen = () => {
         .then(domains => {setDomains(domains)})
         .catch(e => console.log(`e`, e))
     }, [])
-    console.log(`domains`, domains)
+
+    const deleteDomainInState = (domainID) => {
+        const _domains = [...domains]
+        const idx = domains.findIndex(item => item._id === domainID)
+        _domains.splice(idx,1)
+        setDomains(_domains)
+    }
 
     return (
         <div style={{margin: 20}}>
@@ -25,7 +31,7 @@ export const HomeScreen = () => {
                 <NewDomainCard/>
                 {
                     domains.map((domain) => (
-                        <DomainCard key={domain._id} domainDetails={domain}/>
+                        <DomainCard key={domain._id} domainDetails={domain} deleteDomainInState={deleteDomainInState}/>
                     ))
                 }
             </div>

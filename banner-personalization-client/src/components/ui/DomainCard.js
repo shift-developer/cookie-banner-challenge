@@ -3,15 +3,21 @@ import { useNavigate } from 'react-router-dom';
 import { Card, CardActions, CardContent, Chip, IconButton, Tooltip, Typography } from '@mui/material'
 import EditIcon from '@mui/icons-material/Edit'
 import DeleteIcon from '@mui/icons-material/Delete';
+import { deleteDomainById } from '../../api/apiCalls';
 
-export const DomainCard = ({domainDetails}) => {
+export const DomainCard = ({domainDetails, deleteDomainInState}) => {
     const navigate = useNavigate()
     const handleEdit = (domainId) => {
         return navigate('/domain/' + domainId)
     }
 
-    const handleDelete = () => {
-
+    const handleDelete = async (domainId) => {
+        try {
+            const res = await deleteDomainById({domainId})
+            deleteDomainInState(domainId)
+        } catch (e) {
+            console.log(e)
+        }
     }
     return (
         <Card sx={{ minWidth: 275, marginBottom: 2 }} variant="outlined">

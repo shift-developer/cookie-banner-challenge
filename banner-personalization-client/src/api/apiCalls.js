@@ -110,7 +110,24 @@ export const editDomainById = async ({domainId, domainData}) => {
             headers: {Authorization: "Bearer " + _token},
             data: {domain: domainData.domain, bckColor: domainData.bckColor, primaryColor: domainData.primaryColor, fontColor: domainData.fontColor}
         };
-        console.log(`requestOptions.data`, requestOptions.data)
+        const response = await axios('/api/domains/' + domainId, requestOptions)
+        return response.data 
+    } catch (e) {
+        if(e.response.data) {
+            throw new Error(e.response.data.message)
+        }
+        return Promise.reject(e)
+    }
+}
+
+export const deleteDomainById = async ({domainId}) => {
+    try {
+        const _token = localStorage.getItem('token')
+
+        const requestOptions = {
+            method: 'DELETE',
+            headers: {Authorization: "Bearer " + _token}
+        };
         const response = await axios('/api/domains/' + domainId, requestOptions)
         return response.data 
     } catch (e) {
