@@ -38,7 +38,6 @@ export const LoginScreen = () => {
 
         } catch (e) {
             setLoading({loading: false, error: e.message})
-            console.log(e)
         }
 
         

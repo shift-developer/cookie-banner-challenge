@@ -51,7 +51,6 @@ export const RegisterScreen = () => {
 
         } catch (e) {
             setLoading({loading: false, error: e.message})
-            console.log(e)
         }
 
     }

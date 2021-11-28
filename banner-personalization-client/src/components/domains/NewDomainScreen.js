@@ -46,7 +46,6 @@ export const NewDomainScreen = () => {
             return navigate('/domain/'+domainId)
         } catch (e) {
             setLoading({error: e.message, loading: false})
-            console.log(e)
         }
 
     }

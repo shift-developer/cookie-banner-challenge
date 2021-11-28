@@ -54,11 +54,9 @@ export const DomainScreen = () => {
         try {
             setLoadingEdit({loadingEdit: true, errorEdit: null})
             const response = await editDomainById({domainId, domainData: {bckColor: `#${bckColor.hex || domainData.bckColor}`, primaryColor: `#${primaryColor.hex || domainData.primaryColor}`, fontColor: `#${fontColor.hex || domainData.fontColor}`, domain: domainData.domain}})
-            console.log(`response`, response)
             return navigate('/')
         } catch (e) {
             setLoadingEdit({loadingEdit: false, errorEdit: e.message})
-            console.log(e)
         }
 
     }

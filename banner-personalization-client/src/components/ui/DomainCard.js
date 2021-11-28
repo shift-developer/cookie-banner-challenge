@@ -16,7 +16,6 @@ export const DomainCard = ({domainDetails, deleteDomainInState}) => {
             const res = await deleteDomainById({domainId})
             deleteDomainInState(domainId)
         } catch (e) {
-            console.log(e)
         }
     }
     return (
