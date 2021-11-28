@@ -13,6 +13,7 @@
     "type": "git",
     "url": "git+https://github.com/shift-developer/wibson-challenge.git"
   },
+  "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix banner-personalization-client && npm run build --prefix banner-personalization-client",
   "author": "",
   "license": "ISC",
   "bugs": {

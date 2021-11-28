@@ -25,9 +25,9 @@ app.use('/api',(req, res, next) => {
 
 setRoutesAPI(app)
 
-app.use(express.static(path.join(__dirname, 'banner-personalization-client','build')))
-app.get('/*', (req, res) => {
-	return res.sendFile(path.join(__dirname, 'banner-personalization-client','build','index.html'))
+app.use(express.static(path.join(__dirname,'..', 'banner-personalization-client','build')))
+app.get('*', (req, res) => {
+	return res.sendFile(path.join(__dirname,'..', 'banner-personalization-client','build','index.html'))
 })
 
 
