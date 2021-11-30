@@ -33,7 +33,7 @@ npm run dev
 
 
 
-## 🚀 Deploy - [Click here](https://challenge-wibson-shift-dev.herokuapp.com)
+## 🚀 Deployment - [Click here](https://challenge-wibson-shift-dev.herokuapp.com)
 
 ### User for test purposes:
 
