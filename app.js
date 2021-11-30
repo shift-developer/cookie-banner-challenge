@@ -22,12 +22,19 @@ app.use('/api',(req, res, next) => {
 	next()
 })
 
+app.get('/widget/banner.js', (req, res)=> {
+	return res.sendFile(path.resolve(__dirname, 'banner-widget','banner.js'))
+})
+
 setRoutesAPI(app)
 
 app.use(express.static(path.resolve(__dirname, 'banner-personalization-client','build')))
+app.use(express.static(path.resolve(__dirname, 'banner-widget')))
 app.get('*', (req, res) => {
 	return res.sendFile(path.resolve(__dirname, 'banner-personalization-client','build','index.html'))
 })
+
+
 
 
 const PORT = process.env.PORT || 5000
