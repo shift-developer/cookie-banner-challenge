@@ -32,16 +32,6 @@ npm run dev
 ```
 
 
-
-## 🚀 Deployment - [Click here](https://challenge-wibson-shift-dev.herokuapp.com)
-
-### User for test purposes:
-
-```
-Email: dafi.suarez@gmail.com
-Password: 123456
-````
-
 ### One banner example:
 
 [https://shift-developer.github.io/gifOS/](https://shift-developer.github.io/gifOS/)
