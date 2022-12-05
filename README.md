@@ -1,4 +1,4 @@
-# Wibson-Challenge
+# Cookie-Banner-Challenge
 
 ## 🎯 Goal
 Create a web App that allows the user to insert a customizable banner on their site.
